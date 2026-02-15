@@ -11,3 +11,6 @@ CSVをアップロードして売上を可視化するダッシュボードで�
 ## 起動方法
 pip install -r requirements.txt
 streamlit run app.py
+
+##デプロイ
+https://momoshin117-streamlit-portfolio-app-mai0pw.streamlit.app/
