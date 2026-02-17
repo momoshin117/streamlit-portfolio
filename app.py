@@ -1,10 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-st.title("ホーム")
-
 st.set_page_config(page_title="CSV Dashboard", layout="wide")
-st.title("CSV Dashboard")
+st.title("ホーム")
 st.caption("CSVをアップロードして、データ確認・可視化まで行います。")
 
 uploaded_file = st.file_uploader("CSVファイルをアップロードしてください", type=["csv"])
