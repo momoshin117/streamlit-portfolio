@@ -24,10 +24,22 @@ if keyword:
         mask = mask | view_df[c].astype(str).str.contains(keyword, case=False, na=False)
     view_df = view_df[mask]
 
-st.dataframe(view_df, use_container_width=True, height=520)
-
-#数値
+#数値のフィルター
 st.subheader("数値フィルタ")
+num_cols = view_df.select_dtypes(include=np.number).columns.tolist()
+
+if num_cols:
+    target = st.selectbox("対象の数値列を選択", num_cols)
+
+    filter_num_df = view_df[target].dropna()    #欠損列の削除
+    low = float(filter_num_df.min())
+    high = float(filter_num_df.max())
+
+    vlow, vhigh = st.slider(f"{target}の範囲", low, high, (low, high))
+    view_df = view_df[view_df[target].between(vlow, vhigh)]
+
+#表の描画
+st.dataframe(view_df, use_container_width=True, height=520)
 
 # ダウンロード
 csv_bytes = view_df.to_csv(index=False).encode("utf-8-sig")
