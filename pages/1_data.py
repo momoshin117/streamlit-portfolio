@@ -39,7 +39,7 @@ if num_cols:
     view_df = view_df[view_df[target].between(vlow, vhigh)]
 
 #表の描画
-view_df = view_df.dropna(how="all")
+view_df = view_df.dropna(how="all")     #不要な列を削除
 st.dataframe(view_df, use_container_width=True)
 
 # ダウンロード
