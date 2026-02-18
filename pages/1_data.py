@@ -24,7 +24,7 @@ if keyword:
         mask = mask | view_df[c].astype(str).str.contains(keyword, case=False, na=False)
     view_df = view_df[mask]
 
-#数値のフィルター
+#数値のフィルタ
 st.subheader("数値フィルタ")
 num_cols = view_df.select_dtypes(include=np.number).columns.tolist()
 

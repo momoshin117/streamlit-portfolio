@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 
 st.title("グラフページ")
 
@@ -8,12 +9,21 @@ if df is None:
     st.info("先にトップ(app)でCSVをアップロードしてください。")
     st.stop()
 
-num_cols = df.select_dtypes(include="number").columns.tolist()
-cat_cols = df.select_dtypes(exclude="number").columns.tolist()
+num_cols = df.select_dtypes(include=np.number).columns.tolist()
+cat_cols = df.select_dtypes(exclude=np.number).columns.tolist()
 
 if not num_cols:
     st.warning("数値列がないためグラフを作れません。")
     st.stop()
+
+# #数値のフィルタ
+# target = st.selectbox("フィルタする列", num_cols)
+# filter_num_df = df[target].dropna()
+# low = float(filter_num_df.min())
+# high = float(filter_num_df.max())
+
+# vlow, vhigh = st.slider(f"{target}の範囲", low, high, (low,high))
+# df = df[df[target].between(vlow, vhigh)]
 
 chart_type = st.selectbox("グラフ種類", ["折れ線", "棒", "ヒストグラム", "散布図"])
 
