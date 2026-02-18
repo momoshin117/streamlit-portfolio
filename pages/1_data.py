@@ -39,7 +39,8 @@ if num_cols:
     view_df = view_df[view_df[target].between(vlow, vhigh)]
 
 #表の描画
-st.dataframe(view_df, use_container_width=True, height=520)
+view_df = view_df.dropna(how="all")
+st.dataframe(view_df, use_container_width=True)
 
 # ダウンロード
 csv_bytes = view_df.to_csv(index=False).encode("utf-8-sig")
