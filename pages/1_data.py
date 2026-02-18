@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 
 st.title("データ確認ページ")
 
@@ -24,6 +25,9 @@ if keyword:
     view_df = view_df[mask]
 
 st.dataframe(view_df, use_container_width=True, height=520)
+
+#数値
+st.subhheader("数値フィルタ")
 
 # ダウンロード
 csv_bytes = view_df.to_csv(index=False).encode("utf-8-sig")
