@@ -66,6 +66,16 @@ if chart_type in ["折れ線", "棒", "ヒストグラム"]:
 
 # ===== 散布図 =====
 else:
+    # 散布図は数値列が2つ以上必要
+    if len(num_column_names) < 2:
+        st.warning("散布図は数値列が2つ以上必要です。")
+        st.stop()
+
+    # X軸に使う数値列を選択（初期値は1列目）
     x = st.selectbox("X（数値）", num_column_names, index=0)
-    y = st.selectbox("Y（数値）", num_column_names, index=min(1, len(num_column_names) - 1))
+
+    # Y軸に使う数値列を選択（初期値は2列目）
+    y = st.selectbox("Y（数値）", num_column_names, index=1)
+
+    # 選んだ2列の片方でも欠損がある行は除外して散布図を表示
     st.scatter_chart(df[[x, y]].dropna())
